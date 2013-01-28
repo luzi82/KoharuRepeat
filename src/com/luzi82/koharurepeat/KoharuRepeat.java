@@ -7,6 +7,8 @@ import java.io.PipedWriter;
 import java.io.Reader;
 import java.nio.charset.Charset;
 
+import com.luzi82.koharurepeat.core.KrCore;
+
 public class KoharuRepeat{
 	String[] charsets=null;
 	KoharuRepeat(){
@@ -22,7 +24,7 @@ public class KoharuRepeat{
 		charsets[i++]=r16;
 		KrGUI gui=new KrGUI(this, new KrCore(this));
 	}
-	Reader r02Reader(final InputStream in){
+	public static Reader r02Reader(final InputStream in){
 		final PipedReader pr;
 		final PipedWriter pw;
 		try{
@@ -61,7 +63,7 @@ public class KoharuRepeat{
 		}).start();
 		return pr;
 	}
-	Reader r08Reader(final InputStream in){
+	public static Reader r08Reader(final InputStream in){
 		final PipedReader pr;
 		final PipedWriter pw;
 		try{
@@ -100,7 +102,7 @@ public class KoharuRepeat{
 		}).start();
 		return pr;
 	}
-	Reader r10Reader(final InputStream in){
+	public static Reader r10Reader(final InputStream in){
 		final PipedReader pr;
 		final PipedWriter pw;
 		try{
@@ -139,7 +141,7 @@ public class KoharuRepeat{
 		}).start();
 		return pr;
 	}
-	Reader r16Reader(final InputStream in){
+	public static Reader r16Reader(final InputStream in){
 		final PipedReader pr;
 		final PipedWriter pw;
 		try{
@@ -178,10 +180,10 @@ public class KoharuRepeat{
 		}).start();
 		return pr;
 	}
-	static String r02="Base 2 Number";
-	static String r08="Base 8 Number";
-	static String r10="Base 10 Number";
-	static String r16="Base 16 Number";
+	public static String r02="Base 2 Number";
+	public static String r08="Base 8 Number";
+	public static String r10="Base 10 Number";
+	public static String r16="Base 16 Number";
 	static public void main(String[] arg){
 		new KoharuRepeat();
 	}
