@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 import com.luzi82.koharurepeat.core.KrCore.Killable;
 import com.luzi82.koharurepeat.core.KrCore.SL;
+import com.luzi82.koharurepeat.share.IOOBump;
 
 public class SocketManager implements Killable {
 	class SS extends OutputStream {
@@ -71,8 +72,8 @@ public class SocketManager implements Killable {
 		} catch (IOException e) {
 			throw new Error();
 		}
-		mClientToServerBump = new Thread(new IOBump(ci, so, new CC(), s));
-		mServerToClientBump = new Thread(new IOBump(si, co, new SS(), c));
+		mClientToServerBump = new Thread(new IOOBump(ci, so, new CC(), s));
+		mServerToClientBump = new Thread(new IOOBump(si, co, new SS(), c));
 	}
 
 	public String getSHost() {

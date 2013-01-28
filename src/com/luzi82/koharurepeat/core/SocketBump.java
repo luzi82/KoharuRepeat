@@ -10,41 +10,9 @@ import java.io.Writer;
 
 import com.luzi82.koharurepeat.KoharuRepeat;
 import com.luzi82.koharurepeat.share.KrThreadJoin;
+import com.luzi82.koharurepeat.share.RWBump;
 
 public class SocketBump implements KrCore.Killable {
-	/**
-	 * 
-	 */
-
-	class ReaderToListenerBump implements Runnable {
-		Reader mReader;
-		Writer mListener;
-
-		ReaderToListenerBump(Reader r, Writer l) {
-			this.mReader = r;
-			this.mListener = l;
-		}
-
-		public void run() {
-			try {
-				while (true) {
-					int i = mReader.read();
-					if (i == -1)
-						break;
-					mListener.write(i);
-					// System.out.println(i);
-				}
-			} catch (IOException e) {
-				throw new Error(e);
-			}
-			try {
-				mListener.close();
-			} catch (IOException e) {
-				throw new Error(e);
-			}
-		}
-	}
-
 	OutputStream mServerOutputStream;
 	OutputStream mClientOutputStream;
 	Reader mServerReader;
@@ -118,11 +86,11 @@ public class SocketBump implements KrCore.Killable {
 	}
 
 	public void setClientListener(Writer aWriter) {
-		new Thread(new ReaderToListenerBump(mClientReader, aWriter)).start();
+		new Thread(new RWBump(mClientReader, aWriter)).start();
 	}
 
 	public void setServerListener(Writer aWriter) {
-		new Thread(new ReaderToListenerBump(mServerReader, aWriter)).start();
+		new Thread(new RWBump(mServerReader, aWriter)).start();
 	}
 
 	/*
